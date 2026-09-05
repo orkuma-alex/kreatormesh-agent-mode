@@ -1,0 +1,16 @@
+{
+  "name": "kreatormesh-agent-mode",
+  "version": "1.0.0",
+  "description": "Draft, check and schedule social posts through KreatorMesh — plus a free skill on testing content hooks against your own audience.",
+  "author": { "name": "KreatorMesh", "url": "https://kreatormesh.com" },
+  "license": "MIT",
+  "homepage": "https://kreatormesh.com",
+  "skills": ["../skills/kreatormesh", "../skills/hook-testing-method"],
+  "mcpServers": {
+    "kreatormesh": {
+      "type": "http",
+      "url": "https://api.kreatormesh.com/api/mcp",
+      "headers": { "Authorization": "Bearer ${KREATORMESH_API_KEY}" }
+    }
+  }
+}

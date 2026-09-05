@@ -1,0 +1,12 @@
+{
+  "$schema": "https://agent-plugins.org/schema/1.0.0/plugin.json",
+  "specVersion": "1.0.0",
+  "name": "kreatormesh-agent-mode",
+  "version": "1.0.0",
+  "description": "Draft, check and schedule social posts through KreatorMesh — plus a free skill on testing content hooks against your own audience.",
+  "license": "MIT",
+  "homepage": "https://kreatormesh.com",
+  "repository": "https://github.com/orkuma-alex/kreatormesh-agent-mode",
+  "skills": ["./skills/kreatormesh", "./skills/hook-testing-method"],
+  "mcp": "./mcp.json"
+}

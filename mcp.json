@@ -1,0 +1,11 @@
+{
+  "mcpServers": {
+    "kreatormesh": {
+      "type": "http",
+      "url": "https://api.kreatormesh.com/api/mcp",
+      "headers": {
+        "Authorization": "Bearer ${KREATORMESH_API_KEY}"
+      }
+    }
+  }
+}
