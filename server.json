@@ -1,0 +1,26 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+  "name": "com.kreatormesh/kreatormesh",
+  "title": "KreatorMesh",
+  "description": "Schedule posts to 10 social platforms and check drafts against hook rules learned from your audience",
+  "version": "1.0.0",
+  "websiteUrl": "https://kreatormesh.com/claude",
+  "repository": {
+    "url": "https://github.com/orkuma-alex/kreatormesh-agent-mode",
+    "source": "github"
+  },
+  "remotes": [
+    {
+      "type": "streamable-http",
+      "url": "https://api.kreatormesh.com/api/mcp",
+      "headers": [
+        {
+          "name": "Authorization",
+          "description": "Bearer km_live_... — create a key at kreatormesh.com/api-keys (Creator plan or above). Format: \"Bearer <key>\".",
+          "isRequired": true,
+          "isSecret": true
+        }
+      ]
+    }
+  ]
+}

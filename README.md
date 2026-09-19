@@ -95,6 +95,10 @@ effect on the next request.
 The CLI saves a key to `~/.kreatormesh/config.json` with owner-only permissions where the platform
 supports it. `KREATORMESH_API_KEY` takes precedence and writes nothing to disk.
 
+## Registry listing
+
+`server.json` is the official MCP Registry entry; see [PUBLISHING.md](PUBLISHING.md).
+
 ## Licence
 
 MIT. See [LICENSE](LICENSE).
