@@ -66,23 +66,33 @@ environment (preferred in CI and agent sandboxes, since it leaves nothing on dis
 
 | Tool | Use it for |
 |---|---|
-| `list_connections` | account ids, handles and platforms — call this first |
+| `list_connections` | account ids, handles and platforms. Call first. |
 | `list_hook_rules` | rules learned from this account's completed hook tests |
-| `check_draft` | check a caption against those rules **before** publishing |
-| `list_posts` | drafts, scheduled, posted and failed |
-| `get_performance` | cross-platform results for recent posts |
+| `check_draft` | check a caption against those rules before publishing |
+| `schedule_post` | save a draft, or schedule a post, with or without media (public https URLs) |
+| `list_posts` | drafts, scheduled, posted and failed. Filter with `status`, keep `limit` small. |
+| `get_post` | one post by id: caption, media, schedule, status, and per-platform links once published |
+| `cancel_post` | delete a post that has not gone out yet. Refuses published posts and hook-test posts. |
+| `get_performance` | metrics for published posts: totals across all of them, plus the newest `limit` in detail |
 | `list_evergreen` | posts that already performed and are being recycled |
-| `schedule_text_post` | save a draft, or schedule a text post |
+| `create_hook_test` | start a hook test. Schedules real posts, so confirm first. |
 
 The ordering is the point. `check_draft` between writing and scheduling is what makes this different
 from a cross-poster: it tells you which of your *measured* rules a draft breaks, and by how much.
 
 ## Known limits, stated up front
 
-- **Text posts only through these tools.** Video and images need the REST API and a real upload.
+- **Media is attached by URL.** `schedule_post` takes public https links to images or video, and the
+  platform fetches them when the post publishes, so the link must still work then. Instagram, TikTok,
+  YouTube and Pinterest need at least one; X, LinkedIn, Facebook, Threads, Bluesky and Google
+  Business accept text alone.
+- **`cancel_post` only stops posts that have not gone out.** A published post is already live on the
+  platform; deleting KreatorMesh's record would not take it down, so the tool refuses and says so.
 - **`check_draft` returns nothing until a hook test has completed** in the app. An empty result means
   "no rules learned yet", not "the draft is fine". The free `hook-testing-method` skill explains the
   method meanwhile.
+- **Hook tests need a platform that reports views:** X, YouTube, Instagram, Facebook, Threads,
+  Pinterest and TikTok. Bluesky and LinkedIn report likes and comments only, so tests are refused there.
 - **API keys cannot manage API keys.** Listing, creating and revoking need a signed-in session, so a
   leaked key cannot mint more or revoke the one you are using to investigate it.
 - **A key acts as its owner.** Anything these tools can do, that person could do.

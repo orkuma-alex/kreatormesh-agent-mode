@@ -46,9 +46,14 @@ separates this from any cross-posting tool.
    the draft follows and which it breaks, with the measured effect of each.
 5. Revise if it breaks a rule with a large measured effect. Breaking one deliberately is fine —
    say so, and say why.
-6. **`schedule_text_post`** — omit the timestamp to save a draft for review, or pass an ISO-8601
-   UTC time to schedule it.
-7. **`list_posts`** — confirm it saved, and check nothing similar is already queued.
+6. **`schedule_post`** — omit `scheduledAtUtc` to save a draft for review, or pass an ISO-8601 UTC
+   time to schedule it. Attach images or video with `mediaUrls` (public https links).
+7. **`get_post`** with the returned id — confirm what was saved. Use `list_posts` to check nothing
+   similar is already queued.
+
+If the person changes their mind, **`cancel_post`** deletes a post that has not gone out. Confirm
+first: it deletes. It refuses a post that is already published (it is live on the platform, and
+deleting the record here would not take it down) and one that belongs to a running hook test.
 
 ## Tools
 
@@ -57,10 +62,13 @@ separates this from any cross-posting tool.
 | `list_connections` | account ids, handles and platforms. Call first. |
 | `list_hook_rules` | rules learned from this account's completed hook tests |
 | `check_draft` | check a caption against those rules before publishing |
-| `list_posts` | drafts, scheduled, posted and failed. Filter with `status`. |
-| `get_performance` | cross-platform results for recent posts |
+| `schedule_post` | save a draft, or schedule a post, with or without media (public https URLs) |
+| `list_posts` | drafts, scheduled, posted and failed. Filter with `status`, keep `limit` small. |
+| `get_post` | one post by id: caption, media, schedule, status, and per-platform links once published |
+| `cancel_post` | delete a post that has not gone out yet. Refuses published posts and hook-test posts. |
+| `get_performance` | metrics for published posts: totals across all of them, plus the newest `limit` in detail |
 | `list_evergreen` | posts that already performed and are being recycled |
-| `schedule_text_post` | save a draft or schedule a text post |
+| `create_hook_test` | start a hook test. Schedules real posts, so confirm first. |
 
 ## Things that will otherwise surprise you
 
@@ -71,8 +79,16 @@ anything" — rather than implying the draft was verified. Suggest running a tes
 <https://kreatormesh.com/hook-testing>. The `hook-testing-method` skill in this same package
 explains the method and needs no account.
 
-**Text posts only through these tools.** Anything with video or an image needs the REST API and a
-real upload; `schedule_text_post` will not carry media. Do not offer to schedule a video here.
+**Media goes by URL, and the URL must still work at publish time.** `schedule_post` takes public
+https links in `mediaUrls`; the platform downloads them when the post goes out, not when you call
+the tool. A link that expires (a signed or temporary URL) will fail later. Instagram, TikTok, YouTube
+and Pinterest refuse a post with no media; X, LinkedIn, Facebook, Threads, Bluesky and Google
+Business take text alone. Kind is read from the file extension; append `#video` or `#image` to a
+link that has none.
+
+**Hook tests only run where views are reported.** X, YouTube, Instagram, Facebook, Threads,
+Pinterest and TikTok. On Bluesky or LinkedIn `create_hook_test` is refused, because those platforms
+report likes and comments but never how many people saw a post.
 
 **Omitting the publish time saves a draft.** That is the safer default when the user has not said
 when to post. Do not invent a publish time to fill the field.
