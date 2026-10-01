@@ -1,6 +1,7 @@
 # KreatorMesh Agent Mode
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+[![KreatorMesh MCP connector – tool definition quality and endpoint health on Glama](https://glama.ai/mcp/connectors/com.kreatormesh/kreatormesh/badges/score.svg)](https://glama.ai/mcp/connectors/com.kreatormesh/kreatormesh)
 
 Give your AI agent the ability to draft, check and schedule social posts — and, more usefully, to
 find out what has actually worked on your audience before it writes anything.
