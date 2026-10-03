@@ -3,7 +3,7 @@
   "name": "com.kreatormesh/kreatormesh",
   "title": "KreatorMesh",
   "description": "Schedule posts to 10 social platforms and check drafts against hook rules learned from your audience",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "websiteUrl": "https://kreatormesh.com/claude",
   "repository": {
     "url": "https://github.com/orkuma-alex/kreatormesh-agent-mode",
@@ -16,8 +16,8 @@
       "headers": [
         {
           "name": "Authorization",
-          "description": "Bearer km_live_... — create a key at kreatormesh.com/api-keys (Creator plan or above). Format: \"Bearer <key>\".",
-          "isRequired": true,
+          "description": "Optional. OAuth sign-in is supported (clients discover it from the 401). Or send an API key: \"Bearer km_live_...\" from kreatormesh.com/api-keys (Creator plan or above).",
+          "isRequired": false,
           "isSecret": true
         }
       ]

@@ -1,6 +1,6 @@
 ---
 name: kreatormesh
-description: Draft, check and schedule social posts through KreatorMesh across TikTok, Instagram, YouTube, X, LinkedIn and more. Use when asked to write, check, schedule or review social content, to see what is already drafted or scheduled, or to find out how recent posts performed. Requires a KreatorMesh API key.
+description: Draft, check and schedule social posts through KreatorMesh across TikTok, Instagram, YouTube, X, LinkedIn and more. Use when asked to write, check, schedule or review social content, to see what is already drafted or scheduled, or to find out how recent posts performed. Requires a KreatorMesh account; connect with OAuth or an API key.
 ---
 
 # KreatorMesh
@@ -11,16 +11,18 @@ it work*, not only as a way to push text outward.
 
 ## Setup
 
-The user needs a KreatorMesh account on the Creator plan or above, and an API key created at
-<https://kreatormesh.com/api-keys>. Keys look like `km_live_…` and are shown once.
-
-**MCP (preferred).** Point the client at:
+The user needs a KreatorMesh account on the Creator plan or above. The MCP server is:
 
 ```
 https://api.kreatormesh.com/api/mcp
 ```
 
-with the key as a bearer token. The tools below then appear directly.
+**Connect (preferred where the client offers it).** Clients with a connector screen — claude.ai,
+Claude Desktop, ChatGPT, Claude Code via `/mcp` — sign in with OAuth: the user clicks Connect,
+approves on a KreatorMesh page, and no key is copied anywhere.
+
+**API key.** Otherwise send `Authorization: Bearer km_live_…`, using a key created at
+<https://kreatormesh.com/api-keys> (keys are shown once). The tools below then appear directly.
 
 **CLI (no MCP client).**
 
@@ -29,8 +31,13 @@ npx kreatormesh-cli setup --key km_live_...
 npx kreatormesh-cli accounts
 ```
 
-If the user has no key, send them to <https://kreatormesh.com/api-keys> rather than guessing one.
-An API key cannot create or revoke other keys — that needs a signed-in session, by design.
+If the user has no key and their client cannot Connect, send them to
+<https://kreatormesh.com/api-keys> rather than guessing one. Neither a key nor a connected app can
+create keys or approve connections — that needs a signed-in session, by design.
+
+**Connection expiry.** `list_connections` returns `expiresAt` for each account's access token. Where
+`autoRenews` is true, KreatorMesh renews it on next use, so a past date is normal — do not tell the
+user the account has lapsed. Only a past `expiresAt` with `autoRenews` false needs a reconnect.
 
 ## The workflow that matters
 

@@ -53,10 +53,20 @@ Node 18+. No dependencies.
 
 ## Connecting
 
-You need a KreatorMesh account on the Creator plan or above and an API key from
-<https://kreatormesh.com/api-keys>. Keys are shown once.
+You need a KreatorMesh account on the Creator plan or above. The MCP server is
+`https://api.kreatormesh.com/api/mcp`. There are two ways to sign in to it.
 
-**MCP** — point your client at `https://api.kreatormesh.com/api/mcp` with the key as a bearer token,
+**Connect (OAuth) — for Claude, ChatGPT and other apps with a connector screen.** Add a custom
+connector with the URL above and click Connect. You are sent to a KreatorMesh page that names the
+app and what it will be able to do; click Allow. No key to copy. Disconnect it any time under
+Connected apps on <https://kreatormesh.com/api-keys>.
+
+- **claude.ai / Claude Desktop:** Settings → Connectors → Add custom connector.
+- **Claude Code:** `claude mcp add --transport http kreatormesh https://api.kreatormesh.com/api/mcp`,
+  then run `/mcp` and choose KreatorMesh to sign in.
+
+**API key — for scripts, CI and clients without a sign-in flow.** Create one at
+<https://kreatormesh.com/api-keys> (shown once) and send it as `Authorization: Bearer km_live_…`,
 or set `KREATORMESH_API_KEY` and use the bundled `mcp.json`.
 
 **CLI** — `npx kreatormesh-cli setup --key km_live_...`, or set `KREATORMESH_API_KEY` in the
