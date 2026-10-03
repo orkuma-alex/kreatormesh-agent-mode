@@ -75,6 +75,7 @@ deleting the record here would not take it down) and one that belongs to a runni
 | `cancel_post` | delete a post that has not gone out yet. Refuses published posts and hook-test posts. |
 | `get_performance` | metrics for published posts: totals across all of them, plus the newest `limit` in detail |
 | `list_evergreen` | posts that already performed and are being recycled |
+| `get_link_in_bio` | the kreatormesh.com/@name page and its last 30 days: views, taps per link, top source apps and countries |
 | `create_hook_test` | start a hook test. Schedules real posts, so confirm first. |
 
 ## Things that will otherwise surprise you
