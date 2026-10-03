@@ -69,7 +69,7 @@ deleting the record here would not take it down) and one that belongs to a runni
 | `list_connections` | account ids, handles and platforms. Call first. |
 | `list_hook_rules` | rules learned from this account's completed hook tests |
 | `check_draft` | check a caption against those rules before publishing |
-| `schedule_post` | save a draft, or schedule a post, with or without media (public https URLs) |
+| `schedule_post` | save a draft, or schedule a post, with or without media (public https URLs). TikTok needs `tiktokPrivacy`. |
 | `list_posts` | drafts, scheduled, posted and failed. Filter with `status`, keep `limit` small. |
 | `get_post` | one post by id: caption, media, schedule, status, and per-platform links once published |
 | `cancel_post` | delete a post that has not gone out yet. Refuses published posts and hook-test posts. |
@@ -92,6 +92,10 @@ the tool. A link that expires (a signed or temporary URL) will fail later. Insta
 and Pinterest refuse a post with no media; X, LinkedIn, Facebook, Threads, Bluesky and Google
 Business take text alone. Kind is read from the file extension; append `#video` or `#image` to a
 link that has none.
+
+**TikTok needs a privacy choice from the person.** `schedule_post` refuses a TikTok target without
+`tiktokPrivacy` (public, friends or private). Ask; do not pick one for them, because TikTok requires the
+person to choose. Only public posts can be measured, so say so if they choose otherwise.
 
 **Hook tests only run where views are reported.** X, YouTube, Instagram, Facebook, Threads,
 Pinterest and TikTok. On Bluesky or LinkedIn `create_hook_test` is refused, because those platforms

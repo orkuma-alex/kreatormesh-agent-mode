@@ -79,7 +79,7 @@ environment (preferred in CI and agent sandboxes, since it leaves nothing on dis
 | `list_connections` | account ids, handles and platforms. Call first. |
 | `list_hook_rules` | rules learned from this account's completed hook tests |
 | `check_draft` | check a caption against those rules before publishing |
-| `schedule_post` | save a draft, or schedule a post, with or without media (public https URLs) |
+| `schedule_post` | save a draft, or schedule a post, with or without media (public https URLs). TikTok needs `tiktokPrivacy`. |
 | `list_posts` | drafts, scheduled, posted and failed. Filter with `status`, keep `limit` small. |
 | `get_post` | one post by id: caption, media, schedule, status, and per-platform links once published |
 | `cancel_post` | delete a post that has not gone out yet. Refuses published posts and hook-test posts. |
