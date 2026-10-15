@@ -58,7 +58,9 @@ separates this from any cross-posting tool.
 7. **`get_post`** with the returned id — confirm what was saved. Use `list_posts` to check nothing
    similar is already queued.
 
-If the person changes their mind, **`cancel_post`** deletes a post that has not gone out. Confirm
+If the person wants something changed — the wording, the video, the time — use **`update_post`**: only
+the fields you pass change, and the edit is checked against each platform's limits. Confirm the
+change first. If they want the post gone, **`cancel_post`** deletes a post that has not gone out. Confirm
 first: it deletes. It refuses a post that is already published (it is live on the platform, and
 deleting the record here would not take it down) and one that belongs to a running hook test.
 
@@ -72,6 +74,7 @@ deleting the record here would not take it down) and one that belongs to a runni
 | `schedule_post` | save a draft, or schedule a post, with or without media (public https URLs). TikTok needs `tiktokPrivacy`. |
 | `list_posts` | drafts, scheduled, posted and failed. Filter with `status`, keep `limit` small. |
 | `get_post` | one post by id: caption, media, schedule, status, and per-platform links once published |
+| `update_post` | change a draft or scheduled post's caption, media, TikTok visibility or time, or move it back to a draft. Checked against each platform's limits. Refuses published, failed and hook-test posts. |
 | `cancel_post` | delete a post that has not gone out yet. Refuses published posts and hook-test posts. |
 | `get_performance` | metrics for published posts: totals across all of them, plus the newest `limit` in detail |
 | `list_evergreen` | posts that already performed and are being recycled |

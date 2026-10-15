@@ -82,6 +82,7 @@ environment (preferred in CI and agent sandboxes, since it leaves nothing on dis
 | `schedule_post` | save a draft, or schedule a post, with or without media (public https URLs). TikTok needs `tiktokPrivacy`. |
 | `list_posts` | drafts, scheduled, posted and failed. Filter with `status`, keep `limit` small. |
 | `get_post` | one post by id: caption, media, schedule, status, and per-platform links once published |
+| `update_post` | change a draft or scheduled post's caption, media, TikTok visibility or time, or move it back to a draft. Checked against each platform's limits. Refuses published, failed and hook-test posts. |
 | `cancel_post` | delete a post that has not gone out yet. Refuses published posts and hook-test posts. |
 | `get_performance` | metrics for published posts: totals across all of them, plus the newest `limit` in detail |
 | `list_evergreen` | posts that already performed and are being recycled |
@@ -97,6 +98,10 @@ from a cross-poster: it tells you which of your *measured* rules a draft breaks,
   platform fetches them when the post publishes, so the link must still work then. Instagram, TikTok,
   YouTube and Pinterest need at least one; X, LinkedIn, Facebook, Threads, Bluesky and Google
   Business accept text alone.
+- **Captions are checked against each platform's limit** (X 280, Bluesky 300, Threads and Pinterest 500,
+  Instagram and TikTok 2,200 and so on) when they are saved, and refused if too long rather than cut short.
+- **`update_post` edits instead of cancel-and-recreate.** Only what you pass changes. It refuses a failed
+  post, because some platforms may have published it and re-sending could post twice.
 - **`cancel_post` only stops posts that have not gone out.** A published post is already live on the
   platform; deleting KreatorMesh's record would not take it down, so the tool refuses and says so.
 - **`check_draft` returns nothing until a hook test has completed** in the app. An empty result means
